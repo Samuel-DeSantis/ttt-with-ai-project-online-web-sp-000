@@ -1,5 +1,7 @@
 class Game
 
+  attr_accessor :board, :player_1, :player_2
+
   WIN_COMBINATIONS = [
     [0, 3, 6],
     [1, 4, 7],
@@ -13,26 +15,14 @@ class Game
     [2, 4, 6]
   ]
 
-  def initialize(player_1, player_2, board)
+  def initialize(player_1 = Players::Humans.new("X"), player_2 = Players::Humans.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
-    @board = board.reset!
-  end
-
-  def board
-    @board
-  end
-
-  def player_1
-    @player_1
-  end
-
-  def player_2
-    @player_2
+    @board = board
   end
 
   def current_player
-    turn_count % 2 == 0 ? "O" : "X"
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def won?
