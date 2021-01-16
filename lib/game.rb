@@ -19,7 +19,6 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-
   end
 
   def current_player
@@ -36,6 +35,10 @@ class Game
 
   def draw?
     @board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
   end
 
   def winner
